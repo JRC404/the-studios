@@ -30,8 +30,13 @@ app.post('/', async (req, res) => {
     const user = new User({
         name, email, password
     })
-
-    await user.save();
+    if (await User.exists({ name: name })) {
+        console.log('exists already mofo')
+    }
+    else {
+        console.log('not here yet.')
+        await user.save();
+    }
     await User.find({}, function (err, users) {
         res.render('index', { users: users })
     });
