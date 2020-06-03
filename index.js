@@ -25,8 +25,20 @@ app.engine('.hbs', hbs({
 app.set('view engine', '.hbs');
 
 app.get('/', async (req, res) => {
-    // let users = {}
-    User.find({}, function (err, users) {
+    res.render('index');
+})
+
+app.post('/', async (req, res) => {
+    
+    let {name, email, password} = req.body;
+    const user = new User({
+        name,
+        email,
+        password
+    })
+
+    await user.save();
+    await User.find({}, function (err, users) {
         
         res.render('index', { users: users })
     });
