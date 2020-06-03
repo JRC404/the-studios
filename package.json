@@ -1,0 +1,31 @@
+{
+  "name": "the-studios",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JRC404/the-studios.git"
+  },
+  "keywords": [],
+  "author": "Jacob Reilly-Cooper",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JRC404/the-studios/issues"
+  },
+  "homepage": "https://github.com/JRC404/the-studios#readme"
+}
