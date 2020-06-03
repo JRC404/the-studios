@@ -10,18 +10,14 @@ const mongoose = require('mongoose');
 const User = require('./models/user');
 
 mongoose.connect(`${process.env.DatabaseURL}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    useNewUrlParser: true, useUnifiedTopology: true,
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.engine('.hbs', hbs({
-    defaultLayout: 'layout',
-    extname: 'hbs'
-}));
+app.engine('.hbs', hbs({ defaultLayout: 'layout', extname: 'hbs' }));
 app.set('view engine', '.hbs');
 
 app.get('/', async (req, res) => {
@@ -29,23 +25,18 @@ app.get('/', async (req, res) => {
 })
 
 app.post('/', async (req, res) => {
-    
-    let {name, email, password} = req.body;
+
+    let { name, email, password } = req.body;
     const user = new User({
-        name,
-        email,
-        password
+        name, email, password
     })
 
     await user.save();
     await User.find({}, function (err, users) {
-        
         res.render('index', { users: users })
     });
-    // res.render('index');
 })
 
 app.listen(PORT || 3000, () => {
     console.log(`server listening on ${PORT}`);
-
 })
