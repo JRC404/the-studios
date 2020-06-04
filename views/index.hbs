@@ -7,6 +7,12 @@
     <input type="submit" value="submit">
 </form>
 
-{{#each users}}
-<p>{{this}}</p><button>Delete</button>
-{{/each}}
+{{#each userArr}}
+{{log this}}
+
+<p>Name : {{this.name}} </p>
+<p>Email : {{this.email}}</p>
+<form action="/delete/users/{{this.id}}" method="post">
+    <input type="submit" value="delete">
+</form>
+{{/each}} 

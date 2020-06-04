@@ -26,7 +26,10 @@ app.set('view engine', '.hbs');
 
 app.get('/', async (req, res) => {
     let users = await User.find({});
-    res.render('index', {users});
+    // let theUser = users.toObject();
+    let userArr = users.map(user => user.toObject());
+    
+    res.render('index', {userArr});
 })
 
 app.post('/', async (req, res) => {
@@ -44,8 +47,13 @@ app.post('/', async (req, res) => {
         console.log('not here yet.')
         await user.save();
     }
-    let users = await User.find({});
-    res.render('index', { users: users })
+    
+    res.redirect('/')
+})
+
+app.post('/delete/users/:id', async (req, res) => {
+    await User.findOneAndRemove(req.params.id, {})
+    res.redirect('/')
 })
 
 app.listen(PORT || 3000, () => {
