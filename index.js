@@ -25,7 +25,8 @@ app.engine('.hbs', hbs({
 app.set('view engine', '.hbs');
 
 app.get('/', async (req, res) => {
-    res.render('index');
+    let users = await User.find({});
+    res.render('index', {users});
 })
 
 app.post('/', async (req, res) => {
