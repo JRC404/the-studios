@@ -1,6 +1,6 @@
-# the studios
+![Node.js CI](https://github.com/JRC404/the-studios/workflows/Node.js%20CI/badge.svg)
 
-the social profile for anyone - 
+the social profile for anyone
 
 ## mongoDB setup walkthrough
 
