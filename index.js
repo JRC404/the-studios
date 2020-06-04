@@ -10,14 +10,18 @@ const mongoose = require('mongoose');
 const User = require('./models/user');
 
 mongoose.connect(`${process.env.DatabaseURL}`, {
-    useNewUrlParser: true, useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.engine('.hbs', hbs({ defaultLayout: 'layout', extname: 'hbs' }));
+app.engine('.hbs', hbs({
+    defaultLayout: 'layout',
+    extname: 'hbs'
+}));
 app.set('view engine', '.hbs');
 
 app.get('/', async (req, res) => {
@@ -28,18 +32,19 @@ app.post('/', async (req, res) => {
 
     let { name, email, password } = req.body;
     const user = new User({
-        name, email, password
+        name, 
+        email, 
+        password
     })
-    if (await User.exists({ name: name })) {
-        console.log('exists already mofo')
+    if (await User.exists({ name: name }) || await User.exists({ email: email})) {
+        console.log('exists already')
     }
     else {
         console.log('not here yet.')
         await user.save();
     }
-    await User.find({}, function (err, users) {
-        res.render('index', { users: users })
-    });
+    let users = await User.find({});
+    res.render('index', { users: users })
 })
 
 app.listen(PORT || 3000, () => {
